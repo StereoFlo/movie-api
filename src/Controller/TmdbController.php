@@ -4,8 +4,11 @@ namespace Controller;
 
 use Domain\Tmdb\Model\TmdbModel;
 use ReflectionException;
+use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
@@ -24,12 +27,19 @@ class TmdbController extends AbstractController
     private $tmdbModel;
 
     /**
+     * @var Request|null
+     */
+    private $request;
+
+    /**
      * DefaultController constructor.
+     * @param RequestStack $requestStack
      * @param TmdbModel $tmdbModel
      */
-    public function __construct(TmdbModel $tmdbModel)
+    public function __construct(RequestStack $requestStack, TmdbModel $tmdbModel)
     {
         $this->tmdbModel = $tmdbModel;
+        $this->request = $requestStack->getCurrentRequest();
     }
 
     /**
@@ -80,5 +90,24 @@ class TmdbController extends AbstractController
     {
         $person = $this->tmdbModel->getPerson($id);
         return $this->json($person);
+    }
+
+    /**
+     * @return JsonResponse
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ReflectionException
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public function search(): JsonResponse
+    {
+        $query = $this->request->get('query');
+        if (empty($query)) {
+            throw new RuntimeException('query must be specified');
+        }
+        $results = $this->tmdbModel->search($query);
+        return $this->json($results);
     }
 }

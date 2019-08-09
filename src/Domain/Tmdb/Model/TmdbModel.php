@@ -93,6 +93,21 @@ class TmdbModel
     }
 
     /**
+     * @param string $query
+     * @return array
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ReflectionException
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public function search(string $query): array
+    {
+        return $this->init(\TmdbApi\Section\Search\Movie::class, $query)->get();
+    }
+
+    /**
      * @param string $class
      * @param $query
      * @return TmdbApi

@@ -1,15 +1,22 @@
 movie:
     path: /movie/{id}
     controller: Controller\TmdbController::getMovie
+    methods: [GET]
     requirements:
         id: \d+
 movie.images:
     path: /movie/{id}/images
     controller: Controller\TmdbController::getMovieImages
+    methods: [GET]
     requirements:
         id: \d+
 person:
     path: /person/{id}
     controller: Controller\TmdbController::getPerson
+    methods: [GET]
     requirements:
         id: \d+
+search:
+    path: /search
+    controller: Controller\TmdbController::search
+    methods: [GET]
