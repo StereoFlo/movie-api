@@ -7,6 +7,7 @@ use RuntimeException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
@@ -49,8 +50,9 @@ class ExceptionListener
                 $event->setResponse($this->getResponse(['error' => $e->getMessage()], $e->getCode() > 0 ? $e->getCode() : 401));
                 break;
             case $e instanceof NotFoundHttpException:
+            case $e instanceof HttpException:
             case $e instanceof ModelNotFoundException:
-                $event->setResponse($this->getResponse(['error' => $e->getMessage()], 404));
+                $event->setResponse($this->getResponse(['error' => 'Not found'], 404));
                 break;
             case $e instanceof RuntimeException:
             default:
