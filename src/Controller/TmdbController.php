@@ -104,10 +104,11 @@ class TmdbController extends AbstractController
     public function search(): JsonResponse
     {
         $query = $this->request->get('query');
+        $page  = $this->request->get('page', 1);
         if (empty($query)) {
             throw new RuntimeException('query must be specified');
         }
-        $results = $this->tmdbModel->search($query);
+        $results = $this->tmdbModel->search($query, $page);
         return $this->json($results);
     }
 }

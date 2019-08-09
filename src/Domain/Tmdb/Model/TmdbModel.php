@@ -64,7 +64,9 @@ class TmdbModel
 
     /**
      * @param int $id
+     *
      * @return array
+     *
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
      * @throws RedirectionExceptionInterface
@@ -79,7 +81,9 @@ class TmdbModel
 
     /**
      * @param int $id
+     *
      * @return array
+     *
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
      * @throws RedirectionExceptionInterface
@@ -94,7 +98,10 @@ class TmdbModel
 
     /**
      * @param string $query
+     * @param int $page
+     *
      * @return array
+     *
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
      * @throws RedirectionExceptionInterface
@@ -102,21 +109,24 @@ class TmdbModel
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    public function search(string $query): array
+    public function search(string $query, int $page): array
     {
-        return $this->init(\TmdbApi\Section\Search\Movie::class, $query)->get();
+        return $this->init(\TmdbApi\Section\Search\Movie::class, $query, ['page' => $page])->get();
     }
 
     /**
      * @param string $class
      * @param $query
+     * @param array|null $additional
+     *
      * @return TmdbApi
+     *
      * @throws ReflectionException
      */
-    private function init(string $class, $query): TmdbApi
+    private function init(string $class, $query, array $additional = null): TmdbApi
     {
         $refClass = new ReflectionClass($class);
-        $this->query = new Query($query, true, ['language' => 'ru']);
+        $this->query = new Query($query, true, ['language' => 'ru'] + $additional);
         $this->section = $refClass->newInstance($this->query);
         return new TmdbApi($this->common, $this->section);
     }
