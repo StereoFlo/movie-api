@@ -123,7 +123,7 @@ class TmdbModel
      *
      * @throws ReflectionException
      */
-    private function init(string $class, $query, array $additional = null): TmdbApi
+    private function init(string $class, $query, array $additional = []): TmdbApi
     {
         $refClass = new ReflectionClass($class);
         $this->query = new Query($query, true, ['language' => 'ru'] + $additional);
