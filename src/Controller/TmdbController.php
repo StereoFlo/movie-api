@@ -105,7 +105,7 @@ class TmdbController extends AbstractController
     {
         $query = $this->request->get('query');
         $page  = $this->request->get('page', 1);
-        if (empty($query)) {
+        if (empty($query) || $page < 1 || $page > 1000) {
             throw new RuntimeException('query must be specified');
         }
         $results = $this->tmdbModel->search($query, $page);
