@@ -3,7 +3,7 @@ services:
     public: true
     abstract: true
 
-  Controller\DefaultController:
+  Controller\TmdbController:
     arguments:
       - '@Domain\Tmdb\Model\TmdbModel'
     parent: Symfony\Bundle\FrameworkBundle\Controller\AbstractController

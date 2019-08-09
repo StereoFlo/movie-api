@@ -1,3 +1,15 @@
-index:
-    path: /
-    controller: Controller\DefaultController::index
+movie:
+    path: /movie/{id}
+    controller: Controller\TmdbController::getMovie
+    requirements:
+        id: \d+
+movie.images:
+    path: /movie/{id}/images
+    controller: Controller\TmdbController::getMovieImages
+    requirements:
+        id: \d+
+person:
+    path: /person/{id}
+    controller: Controller\TmdbController::getPerson
+    requirements:
+        id: \d+

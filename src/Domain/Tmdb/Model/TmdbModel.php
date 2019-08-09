@@ -12,6 +12,7 @@ use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use TmdbApi\Common;
 use TmdbApi\Query;
 use TmdbApi\Section\AbstractSection;
+use TmdbApi\Section\Movie\Images;
 use TmdbApi\Section\Movie\Movie;
 use TmdbApi\Section\People\Person;
 use TmdbApi\TmdbApi;
@@ -37,6 +38,10 @@ class TmdbModel
      */
     private $section;
 
+    /**
+     * TmdbModel constructor.
+     * @param Common $common
+     */
     public function __construct(Common $common)
     {
         $this->common = $common;
@@ -70,6 +75,21 @@ class TmdbModel
     public function getMovie(int $id): array
     {
         return $this->init(Movie::class, $id)->get();
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ReflectionException
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public function getMovieImages(int $id): array
+    {
+        return $this->init(Images::class, $id)->get();
     }
 
     /**

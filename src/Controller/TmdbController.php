@@ -16,7 +16,7 @@ use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
  * Class DefaultController
  * @package Controller
  */
-class DefaultController extends AbstractController
+class TmdbController extends AbstractController
 {
     /**
      * @var TmdbModel
@@ -33,17 +33,52 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * @param int $id
+     *
      * @return JsonResponse
-     * @throws ReflectionException
+     *
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
      * @throws RedirectionExceptionInterface
+     * @throws ReflectionException
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    public function index(): JsonResponse
+    public function getMovie(int $id): JsonResponse
     {
-        $movie = $this->tmdbModel->getMovie(2502);
+        $movie = $this->tmdbModel->getMovie($id);
         return $this->json($movie);
+    }
+
+    /**
+     * @param int $id
+     * @return JsonResponse
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ReflectionException
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public function getMovieImages(int $id): JsonResponse
+    {
+        $movie = $this->tmdbModel->getMovieImages($id);
+        return $this->json($movie);
+    }
+
+    /**
+     * @param int $id
+     * @return JsonResponse
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ReflectionException
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public function getPerson(int $id): JsonResponse
+    {
+        $person = $this->tmdbModel->getPerson($id);
+        return $this->json($person);
     }
 }
