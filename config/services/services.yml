@@ -8,3 +8,10 @@ services:
     arguments:
       - '@TmdbApi\Common'
     public: true
+
+  app.exception_listener:
+    class: Application\Listener\ExceptionListener
+    arguments:
+      - '%kernel.environment%'
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception }

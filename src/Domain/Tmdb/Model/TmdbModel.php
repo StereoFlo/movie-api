@@ -2,6 +2,8 @@
 
 namespace Domain\Tmdb\Model;
 
+use Application\Exception\ModelNotFoundException;
+use Exception;
 use ReflectionClass;
 use ReflectionException;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
@@ -69,14 +71,18 @@ class TmdbModel
      *
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
+     * @throws ModelNotFoundException
      * @throws RedirectionExceptionInterface
-     * @throws ReflectionException
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
     public function getMovie(int $id): array
     {
-        return $this->init(Movie::class, $id)->get();
+        try {
+            return $this->init(Movie::class, $id)->get();
+        } catch (Exception $exception) {
+            throw new ModelNotFoundException('movie doesnt found');
+        }
     }
 
     /**
