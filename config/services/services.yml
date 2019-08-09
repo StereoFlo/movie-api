@@ -1,0 +1,10 @@
+services:
+  TmdbApi\Common:
+    arguments:
+      - '%tmdb.url%'
+      - '%tmdb.api_key%'
+
+  Domain\Tmdb\Model\TmdbModel:
+    arguments:
+      - '@TmdbApi\Common'
+    public: true
