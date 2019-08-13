@@ -17,6 +17,7 @@ use TmdbApi\Section\AbstractSection;
 use TmdbApi\Section\Movie\Images;
 use TmdbApi\Section\Movie\Movie;
 use TmdbApi\Section\People\Person;
+use TmdbApi\Section\Trending\Trending;
 use TmdbApi\TmdbApi;
 
 /**
@@ -47,6 +48,20 @@ class TmdbModel
     public function __construct(Common $common)
     {
         $this->common = $common;
+    }
+
+    /**
+     * @return array
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ReflectionException
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public function getTrending(): array
+    {
+        return $this->init(Trending::class, '')->get();
     }
 
     /**

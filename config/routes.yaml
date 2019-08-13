@@ -20,3 +20,7 @@ search:
     path: /search
     controller: Controller\TmdbController::search
     methods: [GET]
+trending:
+    path: /trending
+    controller: Controller\TmdbController::getTrending
+    methods: [GET]

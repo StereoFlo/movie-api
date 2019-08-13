@@ -212,12 +212,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/StereoFlo/tmdb-api.git",
-                "reference": "46c3ba1805bd9ad4d7247fdf1152a8c0f39b51b0"
+                "reference": "be7ff5bd855a04cd8f0a8bd45af8fc9ac2cc2cf7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/StereoFlo/tmdb-api/zipball/46c3ba1805bd9ad4d7247fdf1152a8c0f39b51b0",
-                "reference": "46c3ba1805bd9ad4d7247fdf1152a8c0f39b51b0",
+                "url": "https://api.github.com/repos/StereoFlo/tmdb-api/zipball/be7ff5bd855a04cd8f0a8bd45af8fc9ac2cc2cf7",
+                "reference": "be7ff5bd855a04cd8f0a8bd45af8fc9ac2cc2cf7",
                 "shasum": ""
             },
             "require": {
@@ -242,7 +242,7 @@
                     "email": "stereoflo@users.github.com"
                 }
             ],
-            "time": "2019-08-09T07:07:20+00:00"
+            "time": "2019-08-13T07:07:08+00:00"
         },
         {
             "name": "symfony/cache",

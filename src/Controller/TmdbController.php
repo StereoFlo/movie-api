@@ -2,6 +2,7 @@
 
 namespace Controller;
 
+use Application\Exception\ModelNotFoundException;
 use Domain\Tmdb\Model\TmdbModel;
 use ReflectionException;
 use RuntimeException;
@@ -50,9 +51,9 @@ class TmdbController extends AbstractController
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
      * @throws RedirectionExceptionInterface
-     * @throws ReflectionException
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
+     * @throws ModelNotFoundException
      */
     public function getMovie(int $id): JsonResponse
     {
@@ -109,6 +110,21 @@ class TmdbController extends AbstractController
             throw new RuntimeException('query must be specified');
         }
         $results = $this->tmdbModel->search($query, $page);
+        return $this->json($results);
+    }
+
+    /**
+     * @return JsonResponse
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ReflectionException
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public function getTrending(): JsonResponse
+    {
+        $results = $this->tmdbModel->getTrending();
         return $this->json($results);
     }
 }
