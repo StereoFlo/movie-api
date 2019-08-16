@@ -50,9 +50,11 @@ class ExceptionListener
                 $event->setResponse($this->getResponse(['error' => $e->getMessage()], $e->getCode() > 0 ? $e->getCode() : 401));
                 break;
             case $e instanceof NotFoundHttpException:
-            case $e instanceof HttpException:
             case $e instanceof ModelNotFoundException:
                 $event->setResponse($this->getResponse(['error' => 'Not found'], 404));
+                break;
+            case $e instanceof HttpException:
+                $event->setResponse($this->getResponse(['error' => $e->getMessage()], $e->getCode()));
                 break;
             case $e instanceof RuntimeException:
             default:
