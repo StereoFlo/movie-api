@@ -53,6 +53,7 @@ class TmdbController extends AbstractController
     public function getMovie(int $id): JsonResponse
     {
         $movie = $this->tmdbModel->getMovie($id);
+
         return $this->json($movie);
     }
 
@@ -69,6 +70,7 @@ class TmdbController extends AbstractController
     public function getMovieImages(int $id): JsonResponse
     {
         $movie = $this->tmdbModel->getMovieImages($id);
+
         return $this->json($movie);
     }
 
@@ -85,6 +87,7 @@ class TmdbController extends AbstractController
     public function getPerson(int $id): JsonResponse
     {
         $person = $this->tmdbModel->getPerson($id);
+
         return $this->json($person);
     }
 
@@ -102,10 +105,13 @@ class TmdbController extends AbstractController
     {
         $query = $this->request->get('query');
         $page  = $this->request->get('page', 1);
+
         if (empty($query) || $page < 1 || $page > 1000) {
             throw new RuntimeException('query must be specified');
         }
+
         $results = $this->tmdbModel->search($query, $page);
+
         return $this->json($results);
     }
 
@@ -122,6 +128,7 @@ class TmdbController extends AbstractController
     public function getTrending(): JsonResponse
     {
         $results = $this->tmdbModel->getTrending();
+
         return $this->json($results);
     }
 }

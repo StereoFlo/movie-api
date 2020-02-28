@@ -20,10 +20,6 @@ use TmdbApi\Section\People\Person;
 use TmdbApi\Section\Trending\Trending;
 use TmdbApi\TmdbApi;
 
-/**
- * Class TmdbModel
- * @package Domain\Tmdb\Model
- */
 class TmdbModel
 {
     /**
@@ -149,6 +145,7 @@ class TmdbModel
         $refClass = new ReflectionClass($class);
         $this->query = new Query($query, true, ['language' => 'ru'] + $additional);
         $this->section = $refClass->newInstance($this->query);
+
         return new TmdbApi($this->common, $this->section);
     }
 }

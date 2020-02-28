@@ -11,10 +11,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
-/**
- * Class ExceptionListener
- * @package Application\Listener
- */
 class ExceptionListener
 {
     /**
@@ -27,23 +23,15 @@ class ExceptionListener
      */
     private $environment;
 
-    /**
-     * ExceptionListener constructor.
-     *
-     * @param string              $environment
-     */
     public function __construct(string $environment)
     {
         $this->environment = $environment;
     }
 
-    /**
-     * @param ExceptionEvent $event
-     */
     public function onKernelException(ExceptionEvent $event): void
     {
         $this->event = $event;
-        $e = $event->getException();
+        $e = $event->getThrowable();
 
         switch (true) {
             case $e instanceof UnauthorizedHttpException:
@@ -63,12 +51,6 @@ class ExceptionListener
         }
     }
 
-    /**
-     * @param array $data
-     * @param int $status
-     *
-     * @return Response
-     */
     private function getResponse(array $data, int $status = 200): Response
     {
         return new JsonResponse($data, $status);
