@@ -10,16 +10,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
-/**
- * Class DefaultController
- * @package Controller
- */
 class TmdbController extends AbstractController
 {
     /**
@@ -44,9 +41,7 @@ class TmdbController extends AbstractController
     }
 
     /**
-     * @param int $id
-     *
-     * @return JsonResponse
+     * @Route("/movie/{id}", requirements={"id":"\d+"}, methods={"GET"})
      *
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
@@ -62,8 +57,8 @@ class TmdbController extends AbstractController
     }
 
     /**
-     * @param int $id
-     * @return JsonResponse
+     * @Route("/movie/{id}/images", requirements={"id":"\d+"}, methods={"GET"})
+     *
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
      * @throws RedirectionExceptionInterface
@@ -78,8 +73,8 @@ class TmdbController extends AbstractController
     }
 
     /**
-     * @param int $id
-     * @return JsonResponse
+     * @Route("/person/{id}", requirements={"id":"\d+"}, methods={"GET"})
+     *
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
      * @throws RedirectionExceptionInterface
@@ -94,7 +89,8 @@ class TmdbController extends AbstractController
     }
 
     /**
-     * @return JsonResponse
+     * @Route("/search", methods={"GET"})
+     *
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
      * @throws RedirectionExceptionInterface
@@ -114,7 +110,8 @@ class TmdbController extends AbstractController
     }
 
     /**
-     * @return JsonResponse
+     * @Route("/trending", methods={"GET"})
+     *
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
      * @throws RedirectionExceptionInterface

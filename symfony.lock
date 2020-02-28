@@ -11,10 +11,16 @@
             "config/packages/nelmio_cors.yaml"
         ]
     },
+    "php": {
+        "version": "7.3"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
     "psr/container": {
+        "version": "1.0.0"
+    },
+    "psr/event-dispatcher": {
         "version": "1.0.0"
     },
     "psr/log": {
@@ -53,6 +59,9 @@
     },
     "symfony/dotenv": {
         "version": "v4.3.3"
+    },
+    "symfony/error-handler": {
+        "version": "v5.0.4"
     },
     "symfony/event-dispatcher": {
         "version": "v4.3.3"
@@ -141,6 +150,9 @@
     },
     "symfony/service-contracts": {
         "version": "v1.1.5"
+    },
+    "symfony/var-dumper": {
+        "version": "v5.0.4"
     },
     "symfony/var-exporter": {
         "version": "v4.3.3"

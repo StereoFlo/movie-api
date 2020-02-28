@@ -1,0 +1,23 @@
+version: '3'
+services:
+  php:
+    build: ./docker/php/
+    environment:
+      TIMEZONE: Europe/Moscow
+      XDEBUG_CONFIG: remote_host=host.docker.internal remote_enable=1
+      TZ: Europe/Moscow
+    volumes:
+      - './docker/php/php.ini:/usr/local/etc/php/php.ini'
+      - './:/var/www/app:cached'
+    working_dir: /var/www/app
+  nginx:
+    image: nginx
+    environment:
+      TZ: Europe/Moscow
+    depends_on:
+      - php
+    volumes:
+      - './:/var/www/app:cached'
+      - './docker/nginx/app.conf:/etc/nginx/conf.d/default.conf:ro'
+    ports:
+      - '80:80'
