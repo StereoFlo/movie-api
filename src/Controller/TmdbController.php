@@ -2,10 +2,8 @@
 
 namespace Controller;
 
-use Application\Exception\ModelNotFoundException;
-use Domain\Tmdb\Model\TmdbModel;
-use ReflectionException;
 use RuntimeException;
+use Stereoflo\TmdbBundle\Service;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,28 +14,35 @@ use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use TMDB\Exception\EmptyQueryParamException;
+use TMDB\Exception\InvalidParamException;
+use TMDB\Section\Movies\Images;
+use TMDB\Section\Movies\MovieDetails;
+use TMDB\Section\People\Person;
+use TMDB\Section\Search\Movie;
+use TMDB\Section\Trending\Trending;
 
 class TmdbController extends AbstractController
 {
-    /**
-     * @var TmdbModel
-     */
-    private $tmdbModel;
-
     /**
      * @var Request|null
      */
     private $request;
 
     /**
+     * @var Service
+     */
+    private $service;
+
+    /**
      * DefaultController constructor.
      * @param RequestStack $requestStack
-     * @param TmdbModel $tmdbModel
+     * @param Service $service
      */
-    public function __construct(RequestStack $requestStack, TmdbModel $tmdbModel)
+    public function __construct(RequestStack $requestStack, Service $service)
     {
-        $this->tmdbModel = $tmdbModel;
         $this->request = $requestStack->getCurrentRequest();
+        $this->service = $service;
     }
 
     /**
@@ -48,11 +53,12 @@ class TmdbController extends AbstractController
      * @throws RedirectionExceptionInterface
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
-     * @throws ModelNotFoundException
+     * @throws EmptyQueryParamException
+     * @throws InvalidParamException
      */
     public function getMovie(int $id): JsonResponse
     {
-        $movie = $this->tmdbModel->getMovie($id);
+        $movie = $this->service->get(new MovieDetails(null, [$id]));
 
         return $this->json($movie);
     }
@@ -62,14 +68,15 @@ class TmdbController extends AbstractController
      *
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
+     * @throws EmptyQueryParamException
+     * @throws InvalidParamException
      * @throws RedirectionExceptionInterface
-     * @throws ReflectionException
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
     public function getMovieImages(int $id): JsonResponse
     {
-        $movie = $this->tmdbModel->getMovieImages($id);
+        $movie = $this->service->get(new Images(null, [$id]));
 
         return $this->json($movie);
     }
@@ -79,14 +86,15 @@ class TmdbController extends AbstractController
      *
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
+     * @throws EmptyQueryParamException
+     * @throws InvalidParamException
      * @throws RedirectionExceptionInterface
-     * @throws ReflectionException
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
     public function getPerson(int $id): JsonResponse
     {
-        $person = $this->tmdbModel->getPerson($id);
+        $person = $this->service->get(new Person(null, [$id]));
 
         return $this->json($person);
     }
@@ -96,8 +104,9 @@ class TmdbController extends AbstractController
      *
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
+     * @throws EmptyQueryParamException
+     * @throws InvalidParamException
      * @throws RedirectionExceptionInterface
-     * @throws ReflectionException
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
@@ -110,7 +119,7 @@ class TmdbController extends AbstractController
             throw new RuntimeException('query must be specified');
         }
 
-        $results = $this->tmdbModel->search($query, $page);
+        $results = $this->service->get(new Movie(null, ['page', $page], ['query' => $query]));
 
         return $this->json($results);
     }
@@ -120,14 +129,15 @@ class TmdbController extends AbstractController
      *
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
+     * @throws EmptyQueryParamException
+     * @throws InvalidParamException
      * @throws RedirectionExceptionInterface
-     * @throws ReflectionException
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
     public function getTrending(): JsonResponse
     {
-        $results = $this->tmdbModel->getTrending();
+        $results = $this->service->get(new Trending());
 
         return $this->json($results);
     }
