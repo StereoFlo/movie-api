@@ -7,13 +7,21 @@
         "ext-iconv": "*",
         "nelmio/cors-bundle": "^2.0",
         "sensio/framework-extra-bundle": "^5.5",
-        "symfony/console": "^5.0",
-        "symfony/dotenv": "^5.0",
+        "stereoflo/tmdb-bundle": "^1.0",
+        "symfony/console": "^4.4",
+        "symfony/dotenv": "^4.4",
         "symfony/flex": "^1.6",
-        "symfony/framework-bundle": "^5.0",
-        "symfony/yaml": "^5.0"
+        "symfony/framework-bundle": "^4.4",
+        "symfony/yaml": "^4.4"
     },
     "require-dev": {
+        "consolidation/robo": "^1.4",
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "friendsofphp/php-cs-fixer": "^2.15",
+        "phan/phan": "^2.2",
+        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan-doctrine": "^0.12",
+        "phpstan/phpstan-symfony": "^0.12"
     },
     "config": {
         "preferred-install": {
@@ -23,12 +31,12 @@
     },
     "autoload": {
         "psr-4": {
-            "": "src/"
+            "MovieApi\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "MovieApi\\Tests\\": "tests/"
         }
     },
     "replace": {
@@ -57,7 +65,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "^5.0"
+            "require": "^4.4"
         }
     }
 }
