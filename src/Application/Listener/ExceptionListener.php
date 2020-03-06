@@ -1,8 +1,10 @@
 <?php
 
-namespace Application\Listener;
+declare(strict_types = 1);
 
-use Application\Exception\ModelNotFoundException;
+namespace MovieApi\Application\Listener;
+
+use MovieApi\Application\Exception\ModelNotFoundException;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +33,7 @@ class ExceptionListener
     public function onKernelException(ExceptionEvent $event): void
     {
         $this->event = $event;
-        $e = $event->getThrowable();
+        $e           = $event->getThrowable();
 
         switch (true) {
             case $e instanceof UnauthorizedHttpException:
@@ -51,6 +53,9 @@ class ExceptionListener
         }
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     private function getResponse(array $data, int $status = 200): Response
     {
         return new JsonResponse($data, $status);

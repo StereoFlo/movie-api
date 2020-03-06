@@ -6,27 +6,22 @@ services:
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-    #    App\:
-    #        resource: '../src/*'
-    #        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+    MovieApi\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    #    App\Controller\:
-    #        resource: '../src/Controller'
-    #        tags: ['controller.service_arguments']
+    MovieApi\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
     app.exception_listener:
-        class: Application\Listener\ExceptionListener
+        class: MovieApi\Application\Listener\ExceptionListener
         arguments:
             - '%kernel.environment%'
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
-
-    Controller\TmdbController:
-        arguments:
-            - '@request_stack'
-            - '@tmdb.service'
