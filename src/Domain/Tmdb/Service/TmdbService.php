@@ -115,10 +115,10 @@ class TmdbService
      *
      * @return array<string, mixed>
      */
-    public function search(string $query, int $page = 1): array
+    public function search(string $query, string $page = '1'): array
     {
         if (!$this->getCache(md5($query . $page))) {
-            $this->setCache($query . $page, $this->service->get(new Movie(null, ['page', $page], ['query' => $query])));
+            $this->setCache(md5($query . $page), $this->service->get(new Movie(null, ['page', $page], ['query' => $query])));
         }
 
         return $this->getCache(md5($query . $page));
