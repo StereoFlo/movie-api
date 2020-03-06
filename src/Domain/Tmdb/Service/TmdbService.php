@@ -139,7 +139,7 @@ class TmdbService
     public function getTrending(): array
     {
         if (!$this->getCache('trending')) {
-            $this->setCache('trending', $this->service->get(new Trending()));
+            $this->setCache('trending', $this->service->get(new Trending(null, ['all', 'week'])));
         }
 
         return $this->getCache('trending');
