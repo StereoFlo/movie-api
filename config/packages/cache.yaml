@@ -16,4 +16,4 @@ framework:
         pools:
             appCache:
                 adapter: cache.adapter.filesystem
-                default_lifetime: 3600
+                default_lifetime: 86400
