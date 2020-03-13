@@ -73,9 +73,10 @@ class TmdbController extends AbstractController
     /**
      * @Route("/trending", methods={"GET"})
      */
-    public function getTrending(): JsonResponse
+    public function getTrending(Request $request): JsonResponse
     {
-        $results = $this->tmdbService->getTrending();
+        $page  = $request->get('page', '1');
+        $results = $this->tmdbService->getTrending($page);
 
         return $this->json($results);
     }
