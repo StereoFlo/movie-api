@@ -75,7 +75,7 @@ class TmdbService
      */
     public function getTrending(string $page = '1'): array
     {
-        return $this->cacheService->get('trending', function () use ($page) {
+        return $this->cacheService->get('trending_' . $page, function () use ($page) {
             return $this->service->get(new Trending(null, ['all', 'week'], ['page' => $page]));
         });
     }
