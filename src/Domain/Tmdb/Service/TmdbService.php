@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace MovieApi\Domain\Tmdb\Service;
 
+use TMDB\Section\Tv\TvDetails;
 use function md5;
 use Stereoflo\TmdbBundle\Service;
 use TMDB\Section\Movies\Images;
@@ -37,6 +38,16 @@ class TmdbService
     {
         return $this->cacheService->get('movie_' . $id, function () use ($id) {
             return $this->service->get(new MovieDetails(null, [$id]));
+        });
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function getTv(int $id): array
+    {
+        return $this->cacheService->get('tv_' . $id, function () use ($id) {
+            return $this->service->get(new TvDetails(null, [$id]));
         });
     }
 

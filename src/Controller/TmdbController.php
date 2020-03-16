@@ -34,6 +34,16 @@ class TmdbController extends AbstractController
     }
 
     /**
+     * @Route("/tv/{id}", requirements={"id":"\d+"}, methods={"GET"})
+     */
+    public function getTv(int $id): JsonResponse
+    {
+        $movie = $this->tmdbService->getTv($id);
+
+        return $this->json($movie);
+    }
+
+    /**
      * @Route("/movie/{id}/images", requirements={"id":"\d+"}, methods={"GET"})
      */
     public function getMovieImages(int $id): JsonResponse
