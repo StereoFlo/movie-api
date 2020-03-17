@@ -3,24 +3,24 @@
 ### Доступные эндпойнты
 
 ##### Все тренды за неделю
-GET /trending?page={page}
+**GET** _/trending?page={page}_
 
 page - integer
 
 #### Открыть информацию по фильму
-GET /movie/{id}
+**GET** _/movie/{id}_
 
 #### Открыть информацию по телепередаче / сериалу
-GET /tv/{id}
+**GET** /tv/{id}
 
 #### Изображения к фильму
-GET /movie/{id}/images
+**GET** _/movie/{id}/images_
 
 #### Информация по актеру
-GET /person/{id}
+**GET** _/person/{id}_
 
 #### Поиск по фильмам
-GET /search?query={query}&page={page}
+**GET** _/search?query={query}&page={page}_
 
 query - string
 page - integer
