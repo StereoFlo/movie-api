@@ -1,15 +1,20 @@
 version: '3'
 services:
   php:
-    build: ./docker/php/
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
     environment:
       TIMEZONE: Europe/Moscow
-      XDEBUG_CONFIG: remote_host=host.docker.internal remote_enable=1
+      XDEBUG_CONFIG: remote_host=172.30.0.1 remote_enable=1
       TZ: Europe/Moscow
     volumes:
       - './docker/php/php.ini:/usr/local/etc/php/php.ini'
       - './:/var/www/app:cached'
     working_dir: /var/www/app
+    entrypoint:
+      - /bin/sh
+    command: ["-c", "composer install && php-fpm"]
   nginx:
     image: nginx
     environment:

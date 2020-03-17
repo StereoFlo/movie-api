@@ -415,16 +415,16 @@
         },
         {
             "name": "stereoflo/tmdb-api",
-            "version": "v2.0.1",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/StereoFlo/tmdb-api.git",
-                "reference": "db02eb31c88f3de8d448e76a2be0ea1a3d95b9a7"
+                "reference": "88c743d4f92676af5c83cab91a5aa2dea2210c33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/StereoFlo/tmdb-api/zipball/db02eb31c88f3de8d448e76a2be0ea1a3d95b9a7",
-                "reference": "db02eb31c88f3de8d448e76a2be0ea1a3d95b9a7",
+                "url": "https://api.github.com/repos/StereoFlo/tmdb-api/zipball/88c743d4f92676af5c83cab91a5aa2dea2210c33",
+                "reference": "88c743d4f92676af5c83cab91a5aa2dea2210c33",
                 "shasum": ""
             },
             "require": {
@@ -446,20 +446,20 @@
                 "MIT"
             ],
             "description": "desc",
-            "time": "2020-03-13T12:12:15+00:00"
+            "time": "2020-03-16T06:31:50+00:00"
         },
         {
             "name": "stereoflo/tmdb-bundle",
-            "version": "v1.0.8",
+            "version": "v1.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/StereoFlo/tmdb-bundle.git",
-                "reference": "04d0cea596814a69b7fb8b3293ce7efb795980b9"
+                "reference": "a624f94da5c8a02cfcf6e0be7aee2ee6aebf8ece"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/StereoFlo/tmdb-bundle/zipball/04d0cea596814a69b7fb8b3293ce7efb795980b9",
-                "reference": "04d0cea596814a69b7fb8b3293ce7efb795980b9",
+                "url": "https://api.github.com/repos/StereoFlo/tmdb-bundle/zipball/a624f94da5c8a02cfcf6e0be7aee2ee6aebf8ece",
+                "reference": "a624f94da5c8a02cfcf6e0be7aee2ee6aebf8ece",
                 "shasum": ""
             },
             "require": {
@@ -484,7 +484,7 @@
                 "MIT"
             ],
             "description": "PHP client for TMDB",
-            "time": "2020-03-13T12:44:40+00:00"
+            "time": "2020-03-16T06:36:11+00:00"
         },
         {
             "name": "symfony/cache",

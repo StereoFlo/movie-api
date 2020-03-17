@@ -16,7 +16,6 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get install -y zip unzip zlib1g-dev libpng-dev libzip-dev
 RUN docker-php-ext-install gd zip
 
-# Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- \
     --filename=composer \
     --install-dir=/usr/bin && \
@@ -31,5 +30,6 @@ RUN pecl install xdebug \
     && echo "xdebug.remote_host=127.0.0.1" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_port=9000" >> /usr/local/etc/php/conf.d/xdebug.ini
 
-# Permission fix
 RUN usermod -u 1000 www-data
+
+WORKDIR /var/www/app
